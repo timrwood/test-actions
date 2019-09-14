@@ -1,0 +1,20 @@
+on: push
+name: Test and deploy to heroku
+jobs:
+  build:
+    name: ruby.build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    - name: ruby.build
+      uses: actions/docker/cli@master
+      with:
+        args: build -f Dockerfile.test -t ci-${{ github.sha }}:latest .
+    - name: ruby.rspec
+      uses: actions/docker/cli@master
+      with:
+        args: run ci-${{ github.sha }}:latest rspec
+    - name: ruby.rubocop
+      uses: actions/docker/cli@master
+      with:
+        args: run ci-${{ github.sha }}:latest rubocop
