@@ -12,9 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: install PostgreSQL client
-      run: apt-get install libpq-dev
-
     - name: Install Gems
       run: |
         gem install bundler
