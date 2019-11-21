@@ -4,18 +4,24 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v1
 
+    - name: install PostgreSQL client
+      run: sudo apt-get install libpq-dev
+
     - name: Set up Ruby 2.6
       uses: actions/setup-ruby@v1
       with:
-        ruby-version: 2.6.3
+        ruby-version: 2.6.5
+
+    - name: Install Gems
+      run: |
+        gem install bundler
+        bundle install --jobs 4 --retry 3
 
     - name: Rubocop
       run: |
-        gem install rubocop
-        rubocop
+        bundle exec rubocop
