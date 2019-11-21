@@ -43,4 +43,6 @@ jobs:
         PGUSER: postgres
         PGPORT: ${{ job.services.postgres.ports[5432] }} # get randomly assigned published port
         RAILS_ENV: test
-      run: bundle exec rails test
+      run: |
+        bundle exec rake db:structure:load
+        bundle exec rails test
