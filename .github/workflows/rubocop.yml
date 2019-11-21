@@ -12,10 +12,6 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Debug
-      run: |
-        cat .bundle/config
-
     - name: Cache Gems
       uses: actions/cache@v1
       with:
