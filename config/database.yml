@@ -9,6 +9,7 @@ test:
   adapter: postgresql
   encoding: utf8
   database: ld_test
+  host: localhost
 
 # We aren't using concurrency, only one process per dyno,
 # so we just create 2 connections for every thread to
