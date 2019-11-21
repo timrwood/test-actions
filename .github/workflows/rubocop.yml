@@ -1,16 +1,21 @@
-name: Rubocop
+name: Ruby
 
 on: [push]
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     steps:
     - uses: actions/checkout@v1
-    - name: Rubocop Linter
-      uses: andrewmcodes/rubocop-linter-action@v1.0.5
+
+    - name: Set up Ruby 2.6
+      uses: actions/setup-ruby@v1
       with:
-        additional_gems: 'rubocop-rails rubocop-performance'
-        fail_level: 'warning'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        ruby-version: 2.6.3
+
+    - name: Rubocop
+      run: |
+        gem install rubocop
+        rubocop
