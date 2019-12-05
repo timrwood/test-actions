@@ -25,7 +25,10 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: Cache Gems Test
+    - name: install PostgreSQL client
+      run: apt-get install postgresql
+
+      - name: Cache Gems Test
       uses: actions/cache@v1
       with:
         path: /usr/local/bundle
